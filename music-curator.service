@@ -1,0 +1,18 @@
+[Unit]
+Description=Music Curator - Instagram Reel to Spotify Pipeline
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/projects/music-curator
+EnvironmentFile=/home/%i/projects/music-curator/.env
+ExecStart=/home/%i/projects/music-curator/venv/bin/streamlit run app.py --server.port 8502 --server.address 0.0.0.0
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=default.target
